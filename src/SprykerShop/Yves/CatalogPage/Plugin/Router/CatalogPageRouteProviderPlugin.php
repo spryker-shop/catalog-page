@@ -12,11 +12,16 @@ use SprykerShop\Yves\Router\Route\RouteCollection;
 
 class CatalogPageRouteProviderPlugin extends AbstractRouteProviderPlugin
 {
-    public const ROUTE_SEARCH = 'search';
-    public const ROUTE_SUGGESTION = 'search/suggestion';
-    public const ROUTER_CHANGE_VIEW_MODE = 'change-view-mode';
+    protected const ROUTE_SEARCH = 'search';
+    protected const ROUTE_SUGGESTION = 'search/suggestion';
+    protected const ROUTER_CHANGE_VIEW_MODE = 'change-view-mode';
 
     /**
+     * Specification:
+     * - Adds Routes to the RouteCollection.
+     *
+     * @api
+     *
      * @param \SprykerShop\Yves\Router\Route\RouteCollection $routeCollection
      *
      * @return \SprykerShop\Yves\Router\Route\RouteCollection

@@ -5,15 +5,13 @@
  * Use of this software requires acceptance of the Evaluation License Agreement. See LICENSE file.
  */
 
-namespace SprykerShop\Yves\CatalogPage\Plugin;
+namespace SprykerShop\Yves\CatalogPage\Plugin\StorageRouter;
 
 use Spryker\Shared\CategoryStorage\CategoryStorageConstants;
 use Spryker\Yves\Kernel\AbstractPlugin;
-use SprykerShop\Yves\ShopRouterExtension\Dependency\Plugin\ResourceCreatorPluginInterface;
+use SprykerShop\Yves\StorageRouterExtension\Dependency\Plugin\ResourceCreatorPluginInterface;
 
 /**
- * @deprecated Use `\SprykerShop\Yves\CatalogPage\Plugin\StorageRouter\CatalogPageResourceCreatorPlugin` instead.
- *
  * @method \SprykerShop\Yves\CatalogPage\CatalogPageFactory getFactory()
  */
 class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements ResourceCreatorPluginInterface
@@ -23,7 +21,7 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     /**
      * @return string
      */
-    public function getType()
+    public function getType(): string
     {
         return CategoryStorageConstants::CATEGORY_NODE_RESOURCE_NAME;
     }
@@ -31,7 +29,7 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     /**
      * @return string
      */
-    public function getModuleName()
+    public function getModuleName(): string
     {
         return 'CatalogPage';
     }
@@ -39,7 +37,7 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     /**
      * @return string
      */
-    public function getControllerName()
+    public function getControllerName(): string
     {
         return 'Catalog';
     }
@@ -47,7 +45,7 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     /**
      * @return string
      */
-    public function getActionName()
+    public function getActionName(): string
     {
         return 'index';
     }
@@ -57,7 +55,7 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
      *
      * @return array
      */
-    public function mergeResourceData(array $data)
+    public function mergeResourceData(array $data): array
     {
         return [
             static::ATTRIBUTE_CATEGORY_NODE => $data,

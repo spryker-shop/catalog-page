@@ -8,6 +8,7 @@
 namespace SprykerShop\Yves\CatalogPage\FacetFilter;
 
 use Generated\Shared\Transfer\FacetSearchResultTransfer;
+use Generated\Shared\Transfer\FacetSearchResultValueTransfer;
 use Generated\Shared\Transfer\RangeSearchResultTransfer;
 use SprykerShop\Yves\CatalogPage\CatalogPageConfig;
 
@@ -44,6 +45,10 @@ class FacetFilter implements FacetFilterInterface
 
             if (!$facet instanceof FacetSearchResultTransfer) {
                 continue;
+            }
+
+            if ($facet->getActiveValue() && !$this->isActiveValueInValues($facet)) {
+                $facet = $this->addActiveValueToValues($facet);
             }
 
             if ($facet->getValues()->count() === 0) {
@@ -83,5 +88,58 @@ class FacetFilter implements FacetFilterInterface
         }
 
         return $rangeSearchResultTransfer->getActiveMaxOrFail() || $rangeSearchResultTransfer->getActiveMinOrFail();
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\FacetSearchResultTransfer $facetSearchResultTransfer
+     *
+     * @return bool
+     */
+    protected function isActiveValueInValues(FacetSearchResultTransfer $facetSearchResultTransfer): bool
+    {
+        $activeValues = is_string($facetSearchResultTransfer->getActiveValue()) ? [$facetSearchResultTransfer->getActiveValue()] : (array)$facetSearchResultTransfer->getActiveValue();
+
+        return !array_diff($activeValues, $this->getFacetValues($facetSearchResultTransfer));
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\FacetSearchResultTransfer $facetSearchResultTransfer
+     *
+     * @return \Generated\Shared\Transfer\FacetSearchResultTransfer
+     */
+    protected function addActiveValueToValues(FacetSearchResultTransfer $facetSearchResultTransfer): FacetSearchResultTransfer
+    {
+        $activeValues = is_string($facetSearchResultTransfer->getActiveValue()) ? [$facetSearchResultTransfer->getActiveValue()] : (array)$facetSearchResultTransfer->getActiveValue();
+        $values = $this->getFacetValues($facetSearchResultTransfer);
+
+        foreach ($activeValues as $activeValue) {
+            if (in_array($activeValue, $values, true)) {
+                continue;
+            }
+
+            $facetSearchResultTransfer->addValue(
+                (new FacetSearchResultValueTransfer())
+                    ->setValue($activeValue)
+                    ->setDocCount(0),
+            );
+        }
+
+        return $facetSearchResultTransfer;
+    }
+
+    /**
+     * @param \Generated\Shared\Transfer\FacetSearchResultTransfer $facetSearchResultTransfer
+     *
+     * @return list<string>
+     */
+    protected function getFacetValues(FacetSearchResultTransfer $facetSearchResultTransfer): array
+    {
+        $values = [];
+
+        foreach ($facetSearchResultTransfer->getValues() as $facetSearchResultValueTransfer) {
+            $values[] = $facetSearchResultValueTransfer->getValue();
+        }
+
+        return $values;
     }
 }

@@ -64,11 +64,11 @@ class CatalogController extends AbstractController
     protected const MESSAGE_PAGE_CANNOT_BE_OPENED = 'catalog.page.cannot_be_opened';
 
     /**
-     * @uses \SprykerShop\Yves\CatalogPage\Plugin\Router\CatalogPageRouteProviderPlugin::ROUTE_NAME_SEARCH
+     * @uses \SprykerShop\Yves\HomePage\Plugin\Router\HomePageRouteProviderPlugin::ROUTE_NAME_HOME
      *
      * @var string
      */
-    protected const ROUTE_SEARCH_PAGE = 'search';
+    protected const ROUTE_HOME_PAGE = 'home';
 
     /**
      * @param array<string, mixed> $categoryNode
@@ -160,7 +160,7 @@ class CatalogController extends AbstractController
             $this->getLogger()->error($e->getMessage(), ['exception' => $e]);
             $this->addErrorMessage(static::MESSAGE_PAGE_CANNOT_BE_OPENED);
 
-            return $this->redirectResponseInternal(static::ROUTE_SEARCH_PAGE);
+            return $this->redirectResponseInternal(static::ROUTE_HOME_PAGE);
         }
 
         return $this->view(

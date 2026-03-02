@@ -9,10 +9,5 @@ namespace SprykerShop\Yves\CatalogPage\FacetFilter;
 
 interface FacetFilterInterface
 {
-    /**
-     * @param array $facets
-     *
-     * @return array
-     */
     public function getFilteredFacets(array $facets): array;
 }

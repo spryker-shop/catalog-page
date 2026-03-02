@@ -29,9 +29,6 @@ class CatalogPageTwigExtension extends TwigExtension
      */
     protected $activeSearchFilterUrlGenerator;
 
-    /**
-     * @param \SprykerShop\Yves\CatalogPage\ActiveSearchFilter\UrlGeneratorInterface $activeSearchFilterUrlGenerator
-     */
     public function __construct(UrlGeneratorInterface $activeSearchFilterUrlGenerator)
     {
         $this->activeSearchFilterUrlGenerator = $activeSearchFilterUrlGenerator;

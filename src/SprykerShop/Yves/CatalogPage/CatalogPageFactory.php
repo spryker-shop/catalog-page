@@ -43,9 +43,6 @@ class CatalogPageFactory extends AbstractFactory
         return new UrlGenerator($this->getSearchClient(), $this->getConfig());
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\FacetFilter\FacetFilterInterface
-     */
     public function createFacetFilter(): FacetFilterInterface
     {
         return new FacetFilter(
@@ -53,25 +50,16 @@ class CatalogPageFactory extends AbstractFactory
         );
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToCategoryStorageClientInterface
-     */
     public function getCategoryStorageClient(): CatalogPageToCategoryStorageClientInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::CLIENT_CATEGORY_STORAGE);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToLocaleClientInterface
-     */
     public function getLocaleClient(): CatalogPageToLocaleClientInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::CLIENT_LOCALE);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToSearchClientInterface
-     */
     public function getSearchClient(): CatalogPageToSearchClientInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::CLIENT_SEARCH);
@@ -85,9 +73,6 @@ class CatalogPageFactory extends AbstractFactory
         return new CatalogPageTwigExtension($this->createActiveSearchFilterUrlGenerator());
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToCatalogClientInterface
-     */
     public function getCatalogClient(): CatalogPageToCatalogClientInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::CLIENT_CATALOG);
@@ -101,49 +86,31 @@ class CatalogPageFactory extends AbstractFactory
         return $this->getProvidedDependency(CatalogPageDependencyProvider::PLUGIN_CATALOG_PAGE_WIDGETS);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToProductCategoryFilterClientInterface
-     */
     public function getProductCategoryFilterClient(): CatalogPageToProductCategoryFilterClientInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::CLIENT_PRODUCT_CATEGORY_FILTER);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToProductCategoryFilterStorageClientInterface
-     */
     public function getProductCategoryFilterStorageClient(): CatalogPageToProductCategoryFilterStorageClientInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::CLIENT_PRODUCT_CATEGORY_FILTER_STORAGE);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToStoreClientInterface
-     */
     public function getStoreClient(): CatalogPageToStoreClientInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::CLIENT_STORE);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\CatalogPageConfig
-     */
     public function getModuleConfig(): CatalogPageConfig
     {
         return $this->getConfig();
     }
 
-    /**
-     * @return \Generated\Shared\Transfer\ShopContextTransfer
-     */
     public function getShopContext(): ShopContextTransfer
     {
         return $this->createShopContextResolver()->resolve();
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Resolver\ShopContextResolverInterface
-     */
     public function createShopContextResolver(): ShopContextResolverInterface
     {
         return new ShopContextResolver($this->getContainer());
@@ -159,9 +126,6 @@ class CatalogPageFactory extends AbstractFactory
         return $this->getProvidedDependency(CatalogPageDependencyProvider::PLUGIN_APPLICATION);
     }
 
-    /**
-     * @return \SprykerShop\Yves\CatalogPage\Dependency\Service\CatalogPageToUtilNumberServiceInterface
-     */
     public function getUtilNumberService(): CatalogPageToUtilNumberServiceInterface
     {
         return $this->getProvidedDependency(CatalogPageDependencyProvider::SERVICE_UTIL_NUMBER);

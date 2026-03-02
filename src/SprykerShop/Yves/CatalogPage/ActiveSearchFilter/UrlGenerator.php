@@ -28,10 +28,6 @@ class UrlGenerator implements UrlGeneratorInterface
      */
     protected $config;
 
-    /**
-     * @param \SprykerShop\Yves\CatalogPage\Dependency\Client\CatalogPageToSearchClientInterface $searchClient
-     * @param \SprykerShop\Yves\CatalogPage\CatalogPageConfig $config
-     */
     public function __construct(CatalogPageToSearchClientInterface $searchClient, CatalogPageConfig $config)
     {
         $this->searchClient = $searchClient;

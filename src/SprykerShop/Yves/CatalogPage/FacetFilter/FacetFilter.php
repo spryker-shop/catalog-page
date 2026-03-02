@@ -19,19 +19,11 @@ class FacetFilter implements FacetFilterInterface
      */
     protected $catalogPageConfig;
 
-    /**
-     * @param \SprykerShop\Yves\CatalogPage\CatalogPageConfig $catalogPageConfig
-     */
     public function __construct(CatalogPageConfig $catalogPageConfig)
     {
         $this->catalogPageConfig = $catalogPageConfig;
     }
 
-    /**
-     * @param array $facets
-     *
-     * @return array
-     */
     public function getFilteredFacets(array $facets): array
     {
         $filteredFacets = [];
@@ -76,11 +68,6 @@ class FacetFilter implements FacetFilterInterface
         return $filteredFacets;
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\RangeSearchResultTransfer $rangeSearchResultTransfer
-     *
-     * @return bool
-     */
     protected function isRangeFilterVisible(RangeSearchResultTransfer $rangeSearchResultTransfer): bool
     {
         if ($this->catalogPageConfig->isVisibleEmptyRangeFilters()) {
@@ -90,11 +77,6 @@ class FacetFilter implements FacetFilterInterface
         return $rangeSearchResultTransfer->getActiveMaxOrFail() || $rangeSearchResultTransfer->getActiveMinOrFail();
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\FacetSearchResultTransfer $facetSearchResultTransfer
-     *
-     * @return bool
-     */
     protected function isActiveValueInValues(FacetSearchResultTransfer $facetSearchResultTransfer): bool
     {
         $activeValues = is_string($facetSearchResultTransfer->getActiveValue()) ? [$facetSearchResultTransfer->getActiveValue()] : (array)$facetSearchResultTransfer->getActiveValue();
@@ -102,11 +84,6 @@ class FacetFilter implements FacetFilterInterface
         return !array_diff($activeValues, $this->getFacetValues($facetSearchResultTransfer));
     }
 
-    /**
-     * @param \Generated\Shared\Transfer\FacetSearchResultTransfer $facetSearchResultTransfer
-     *
-     * @return \Generated\Shared\Transfer\FacetSearchResultTransfer
-     */
     protected function addActiveValueToValues(FacetSearchResultTransfer $facetSearchResultTransfer): FacetSearchResultTransfer
     {
         $activeValues = is_string($facetSearchResultTransfer->getActiveValue()) ? [$facetSearchResultTransfer->getActiveValue()] : (array)$facetSearchResultTransfer->getActiveValue();

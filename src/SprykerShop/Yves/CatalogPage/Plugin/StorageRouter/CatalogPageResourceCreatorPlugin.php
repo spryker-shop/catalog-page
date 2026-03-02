@@ -21,33 +21,21 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
      */
     public const ATTRIBUTE_CATEGORY_NODE = 'categoryNode';
 
-    /**
-     * @return string
-     */
     public function getType(): string
     {
         return CategoryStorageConstants::CATEGORY_NODE_RESOURCE_NAME;
     }
 
-    /**
-     * @return string
-     */
     public function getModuleName(): string
     {
         return 'CatalogPage';
     }
 
-    /**
-     * @return string
-     */
     public function getControllerName(): string
     {
         return 'Catalog';
     }
 
-    /**
-     * @return string
-     */
     public function getActionName(): string
     {
         return 'index';

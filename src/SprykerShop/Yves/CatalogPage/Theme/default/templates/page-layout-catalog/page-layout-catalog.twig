@@ -175,7 +175,7 @@
                             <div class="grid grid--stretch">
                                 {% if data.products %}
                                     {% for product in data.products %}
-                                        {% widget 'CatalogPageProductWidget' args [product, data.viewMode] with {
+                                        {% widget 'CatalogPageProductWidget' args [product, data.viewMode, data.products] with {
                                             data: {
                                                 eventRevealer: eventRevealer,
                                             },

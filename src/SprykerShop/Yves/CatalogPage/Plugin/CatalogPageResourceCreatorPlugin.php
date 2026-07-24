@@ -24,6 +24,8 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     public const ATTRIBUTE_CATEGORY_NODE = 'categoryNode';
 
     /**
+     * {@inheritDoc}
+     *
      * @return string
      */
     public function getType()
@@ -32,6 +34,8 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return string
      */
     public function getModuleName()
@@ -40,6 +44,8 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return string
      */
     public function getControllerName()
@@ -48,6 +54,8 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @return string
      */
     public function getActionName()
@@ -56,6 +64,8 @@ class CatalogPageResourceCreatorPlugin extends AbstractPlugin implements Resourc
     }
 
     /**
+     * {@inheritDoc}
+     *
      * @param array<string, mixed> $data
      *
      * @return array

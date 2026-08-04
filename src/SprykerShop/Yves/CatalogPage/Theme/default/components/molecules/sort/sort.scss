@@ -1,5 +1,11 @@
+@use 'sass:meta';
+
 @mixin catalog-page-sort($name: '.sort') {
     #{$name} {
+        @if meta.mixin-exists(catalog-page-sort-base-hook) {
+            @include catalog-page-sort-base-hook;
+        }
+
         &__col:not(:last-child) {
             padding-right: 0.5rem;
         }

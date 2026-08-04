@@ -1,5 +1,11 @@
+@use 'sass:meta';
+
 @mixin catalog-page-suggestion-product($name: '.suggestion-product') {
     #{$name} {
+        @if meta.mixin-exists(catalog-page-suggestion-product-base-hook) {
+            @include catalog-page-suggestion-product-base-hook;
+        }
+
         &__link {
             color: $setting-color-black;
         }

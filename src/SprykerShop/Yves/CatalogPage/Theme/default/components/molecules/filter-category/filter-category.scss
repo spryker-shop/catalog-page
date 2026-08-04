@@ -1,8 +1,15 @@
+@use 'sass:meta';
+@use 'sass:map';
+
 @mixin catalog-page-filter-category($name: '.filter-category') {
     #{$name} {
+        @if meta.mixin-exists(catalog-page-filter-category-base-hook) {
+            @include catalog-page-filter-category-base-hook;
+        }
+
         &__category-toggle-button {
             @include helper-effect-transition(transform);
-            margin-right: map-get($setting-spacing, 'small');
+            margin-right: map.get($setting-spacing, 'small');
 
             &--collapsed {
                 transform: rotate(-90deg);
@@ -30,7 +37,7 @@
         }
 
         &__menu-item &__menu-item {
-            font-size: map-get($setting-font-size, 'small');
+            font-size: map.get($setting-font-size, 'small');
         }
 
         @content;

@@ -4,8 +4,6 @@ export default class WindowLocationApplicator extends Component {
     protected form: HTMLFormElement;
     protected triggers: HTMLButtonElement[];
 
-    protected readyCallback(): void {}
-
     protected init(): void {
         this.form = <HTMLFormElement>document.getElementsByClassName(this.formClassName)[0];
         this.triggers = <HTMLButtonElement[]>Array.from(document.getElementsByClassName(this.triggerClassName));

@@ -34,7 +34,7 @@ export default class WindowLocationApplicator extends Component {
 
     protected getQueryString(categoryUrl: string = window.location.pathname): void {
         const formData = new FormData(this.form);
-        const data = new URLSearchParams(<URLSearchParams>formData);
+        const data = new URLSearchParams(Array.from(formData, ([key, value]) => [key, String(value)]));
 
         formData.forEach((value: string, key: string) => {
             if (value.length) {

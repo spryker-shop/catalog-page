@@ -24,6 +24,8 @@
     },
     numberFormatConfig: _view.numberFormatConfig | default({}),
     isAjaxHeader: _view.isMiniCartAsyncModeEnabled | default(false),
+    itemListId: null,
+    itemListName: null,
 } %}
 
 {% set numberFormatConfig = {} %}
@@ -73,6 +75,22 @@
 {% endblock %}
 
 {% set catalogProductListId = 'catalog-product-list' %}
+
+{# The shown products as one product list for the traceable events, e.g. GA4 view_item_list; positions continue across result pages.
+   A page built on this layout for its own product selection, e.g. the new products, names its list in `itemListId` and `itemListName`;
+   otherwise the list is the category shown, or the search results. #}
+{% set itemListId = 'search_results' %}
+{% set itemListName = 'Search results' %}
+{% if data.category is not empty %}
+    {% set itemListId = 'category_' ~ data.category.node_id | default %}
+    {% set itemListName = data.category.name | default %}
+{% endif %}
+{% if data.itemListId is not empty %}
+    {% set itemListId = data.itemListId %}
+    {% set itemListName = data.itemListName | default(data.itemListId) %}
+{% endif %}
+{% set itemsPerPage = data.pagination.currentItemsPerPage | default(data.products | length) %}
+{% set itemListIndexOffset = (data.pagination.currentPage | default(1) - 1) * itemsPerPage %}
 
 {% block content %}
     {% include molecule('skip-link') with {
@@ -172,7 +190,7 @@
                         {% block formContentData %}
                             {% set eventRevealer = data.isAjaxHeader ? 'CART_UPDATE_EVENT' : null %}
 
-                            <div class="grid grid--stretch">
+                            <div class="grid grid--stretch" data-item-list-id="{{ itemListId }}" data-item-list-name="{{ itemListName }}" data-item-list-index-offset="{{ itemListIndexOffset }}">
                                 {% if data.products %}
                                     {% for product in data.products %}
                                         {% widget 'CatalogPageProductWidget' args [product, data.viewMode, data.products] with {
@@ -189,6 +207,10 @@
                                     {% endblock %}
                                 {% endif %}
                             </div>
+
+                            {% block productTrackingDetails %}
+                                {% widget 'ProductTrackingDetailsWidget' args [data.products] only %}{% endwidget %}
+                            {% endblock %}
                         {% endblock %}
 
                         {% block formContentPaginationBottom %}
@@ -206,24 +228,32 @@
 
 {% block eventTracker %}
     {% set facets = data.filteredFacets is not empty ? data.filteredFacets : data.facets %}
+    {# The rating filter trigger is the clicked rating step itself, not a focused one: Safari and Firefox on macOS do not focus an element on click. #}
     {% set events = {
         list: events.list | merge([{
             event: 'FILTER_CLICK',
             name: 'click',
             triggers: [
                 {
-                    selector: '.filter-section .filter-rating:has(.js-rating-selector__step:focus)',
+                    selector: '.filter-section .filter-rating .js-rating-selector__step',
                     groupAs: {
                     key: 'filters',
                     toArray: true,
                 },
                     data: {
-                    name: {
-                        selector: 'self',
-                    },
-                    value: {
-                        selector: '.js-rating-selector__input',
-                        attribute: 'value',
+                    ratingFilter: {
+                        selector: '.filter-rating',
+                        closest: true,
+                        flatten: true,
+                        composed: {
+                            name: {
+                                selector: 'self',
+                            },
+                            value: {
+                                selector: '.js-rating-selector__input',
+                                attribute: 'value',
+                            },
+                        },
                     },
                 },
                 },

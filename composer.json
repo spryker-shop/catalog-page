@@ -38,7 +38,8 @@
         "spryker/container": "If you want to use Twig Plugins",
         "spryker/permission": "If you want to use permissions plugins.",
         "spryker/silex": "Use this module when using plugins that need Silex dependencies.",
-        "spryker-shop/asset-widget": "If you want to use components from module AssetWidget"
+        "spryker-shop/asset-widget": "If you want to use components from module AssetWidget",
+        "spryker-shop/traceable-event-widget": "If you want the products to carry their tracking details (ProductTrackingDetailsWidget) for the traceable events."
     },
     "autoload": {
         "psr-4": {
